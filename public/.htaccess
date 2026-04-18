@@ -5,6 +5,10 @@
 
     RewriteEngine On
 
+    # Required when the app is served from a subdirectory (e.g. https://sasho-dev.com/bookingAI).
+    # If you deploy at the domain root instead, remove or adjust this line.
+    RewriteBase /bookingAI/
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
