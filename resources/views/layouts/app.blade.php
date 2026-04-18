@@ -111,14 +111,7 @@
             <div class="p-3 border-top mt-auto d-flex flex-column gap-3">
                 <div>
                     <div class="small text-body-secondary mb-1">Тема</div>
-                    <div class="btn-group w-100" role="group" aria-label="Тема">
-                        <button type="button" class="btn btn-outline-secondary btn-sm" id="theme-dark" title="Тъмна">
-                            <i class="bi bi-moon-stars"></i>
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary btn-sm" id="theme-light" title="Светла">
-                            <i class="bi bi-sun"></i>
-                        </button>
-                    </div>
+                    @include('partials.nav-theme-buttons', ['wrapperClass' => 'w-100'])
                 </div>
                 <div>
                     <div class="small text-body-secondary mb-1">Изглед</div>
@@ -159,16 +152,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    @include('partials.theme-switch-script')
     <script>
         (function () {
-            var THEME_KEY = 'appTheme';
             var VIEW_KEY = 'appViewMode';
-
-            function getTheme() {
-                var t = localStorage.getItem(THEME_KEY);
-                if (t === null || t === '') return 'dark';
-                return t === 'light' ? 'light' : 'dark';
-            }
 
             function getViewMode() {
                 var v = localStorage.getItem(VIEW_KEY);
@@ -176,24 +163,10 @@
                 return v === 'card' ? 'card' : 'table';
             }
 
-            function setTheme(theme) {
-                localStorage.setItem(THEME_KEY, theme);
-                document.documentElement.setAttribute('data-bs-theme', theme);
-                syncThemeButtons();
-            }
-
             function setViewMode(mode) {
                 localStorage.setItem(VIEW_KEY, mode);
                 applyViewMode(mode);
                 syncViewButtons();
-            }
-
-            function syncThemeButtons() {
-                var t = getTheme();
-                var bd = document.getElementById('theme-dark');
-                var bl = document.getElementById('theme-light');
-                if (bd) bd.classList.toggle('active', t === 'dark');
-                if (bl) bl.classList.toggle('active', t === 'light');
             }
 
             function syncViewButtons() {
@@ -211,14 +184,10 @@
                 });
             }
 
-            document.getElementById('theme-dark')?.addEventListener('click', function () { setTheme('dark'); });
-            document.getElementById('theme-light')?.addEventListener('click', function () { setTheme('light'); });
             document.getElementById('view-table')?.addEventListener('click', function () { setViewMode('table'); });
             document.getElementById('view-card')?.addEventListener('click', function () { setViewMode('card'); });
 
-            setTheme(getTheme());
             applyViewMode(getViewMode());
-            syncThemeButtons();
             syncViewButtons();
         })();
     </script>

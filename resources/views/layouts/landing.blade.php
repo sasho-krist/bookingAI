@@ -32,6 +32,10 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/#features') }}">Функции</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/#api') }}">API</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('legal.faq') }}">ЧЗВ</a></li>
+                    <li class="nav-item d-flex align-items-center ms-lg-2 mb-2 mb-lg-0 pt-2 pt-lg-0 border-top border-lg-0 mt-2 mt-lg-0">
+                        <span class="small text-body-secondary me-2 d-none d-lg-inline">Тема</span>
+                        @include('partials.nav-theme-buttons')
+                    </li>
                     @auth
                         <li class="nav-item"><a class="nav-link" href="{{ route('home') }}"><i class="bi bi-speedometer2 me-1"></i>Табло</a></li>
                         <li class="nav-item">
@@ -56,6 +60,7 @@
     @include('partials.landing-footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    @include('partials.theme-switch-script')
     @stack('scripts')
     @include('partials.cookie-banner')
 </body>

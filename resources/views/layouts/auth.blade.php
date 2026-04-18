@@ -18,23 +18,32 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <body class="bg-body-secondary min-vh-100 d-flex flex-column">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg border-bottom bg-body shadow-sm">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url('/') }}">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-semibold" href="{{ url('/') }}">
                 <img src="{{ asset('images/logo.svg') }}" width="28" height="28" alt="" class="d-inline-block">
                 <span>{{ config('app.name') }}</span>
             </a>
-            <div class="navbar-nav ms-auto flex-row gap-2 align-items-center">
-                @guest
-                    <a class="nav-link text-white" href="{{ route('login') }}">Вход</a>
-                    <a class="nav-link text-white" href="{{ route('register') }}">Регистрация</a>
-                @else
-                    <a class="nav-link text-white" href="{{ route('home') }}">Начало</a>
-                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn btn-outline-light btn-sm">Изход</button>
-                    </form>
-                @endguest
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#authNav" aria-controls="authNav" aria-expanded="false" aria-label="Меню">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="authNav">
+                <div class="navbar-nav ms-auto flex-column flex-lg-row gap-lg-2 align-items-lg-center mt-3 mt-lg-0">
+                    @guest
+                        <a class="nav-link" href="{{ route('login') }}">Вход</a>
+                        <a class="nav-link" href="{{ route('register') }}">Регистрация</a>
+                    @else
+                        <a class="nav-link" href="{{ route('home') }}">Начало</a>
+                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-secondary btn-sm">Изход</button>
+                        </form>
+                    @endguest
+                    <div class="d-flex align-items-center gap-2 pt-2 pt-lg-0 border-top border-lg-0 mt-2 mt-lg-0 ps-lg-2">
+                        <span class="small text-body-secondary d-none d-lg-inline">Тема</span>
+                        @include('partials.nav-theme-buttons')
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -46,6 +55,7 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    @include('partials.theme-switch-script')
     <script>
         document.querySelectorAll('[data-password-toggle]').forEach(function (btn) {
             btn.addEventListener('click', function () {
