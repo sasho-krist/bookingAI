@@ -159,7 +159,14 @@
 
             function getViewMode() {
                 var v = localStorage.getItem(VIEW_KEY);
-                if (v === null || v === '') return 'table';
+                if (v === null || v === '') {
+                    // New domain has no localStorage: match local “cards on Начало” without forcing card view on /bookings, /venues, etc.
+                    var path = (window.location.pathname || '').replace(/\/+$/, '') || '/';
+                    if (path === '/home' || path.endsWith('/home')) {
+                        return 'card';
+                    }
+                    return 'table';
+                }
                 return v === 'card' ? 'card' : 'table';
             }
 
