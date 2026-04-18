@@ -157,15 +157,23 @@
         (function () {
             var VIEW_KEY = 'appViewMode';
 
+            function defaultCardForPath(path) {
+                var pages = ['home', 'bookings', 'venues'];
+                for (var i = 0; i < pages.length; i++) {
+                    var p = pages[i];
+                    if (path === '/' + p || path.endsWith('/' + p)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
             function getViewMode() {
                 var v = localStorage.getItem(VIEW_KEY);
                 if (v === null || v === '') {
-                    // New domain has no localStorage: match local “cards on Начало” without forcing card view on /bookings, /venues, etc.
+                    // New domain has no localStorage — default cards on listing pages (works under /bookingAI/… too).
                     var path = (window.location.pathname || '').replace(/\/+$/, '') || '/';
-                    if (path === '/home' || path.endsWith('/home')) {
-                        return 'card';
-                    }
-                    return 'table';
+                    return defaultCardForPath(path) ? 'card' : 'table';
                 }
                 return v === 'card' ? 'card' : 'table';
             }
