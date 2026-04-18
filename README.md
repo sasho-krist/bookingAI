@@ -1,58 +1,261 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# BookingAI / Резервации
+
+Уеб приложение на **Laravel 13** и **PHP 8.3+** за управление на **бизнеси**, **локации (venues)**, **услуги**, **клиенти** и **резервации**, с опционални **AI** възможности (препоръки за слотове, натовареност, чат и др.) чрез **OpenAI API**. Включва **REST API** с **Laravel Sanctum** (Bearer токен) и първоначален **съветник** за настройка.
+
+Интерфейсът е на **български**; навигация, тъмна/светла тема, публична начална страница, политика за поверителност, условия, ЧЗВ и банер за бисквитки.
+
+---
+
+## Съдържание
+
+- [Общо представяне](#общо-представяне)
+- [Скрийншоти](#скрийншоти)
+- [Технологии](#технологии)
+- [Клониране](#клониране)
+- [Инсталиране](#инсталиране)
+- [Конфигурация (.env)](#конфигурация-env)
+- [Функционалности](#функционалности)
+- [REST API](#rest-api)
+- [Тестове и качество на кода](#тестове-и-качество-на-кода)
+- [Полезни команди](#полезни-команди)
+- [Лиценз](#лиценз)
+
+---
+
+## Общо представяне
+
+Проектът е ориентиран към услуги със записани часове: фризьорски салони, студия, консултации и др. Потребителите си създават акаунт, дефинират бизнес и локации, услуги с продължителност, работно време, и водят резервации. Опционално се използва **OpenAI** за интелигентни подсказки, когато в `.env` е зададен `OPENAI_API_KEY`.
+
+---
+
+## Скрийншоти
+
+Изображенията са в [`public/images/screenshots/`](public/images/screenshots/). Преглед директно в хранилището или след клониране — на локален сървър адресите са под `/images/screenshots/…` (спрямо публичния root на Laravel).
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="public/images/screenshots/1.png" alt="Скрийншот 1" width="720">
 </p>
 
-## About Laravel
+<p align="center">
+  <img src="public/images/screenshots/2.png" alt="Скрийншот 2" width="720">
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  <img src="public/images/screenshots/3.png" alt="Скрийншот 3" width="720">
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<p align="center">
+  <img src="public/images/screenshots/4.png" alt="Скрийншот 4" width="720">
+</p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<p align="center">
+  <img src="public/images/screenshots/5.png" alt="Скрийншот 5" width="720">
+</p>
 
-## Learning Laravel
+<p align="center">
+  <img src="public/images/screenshots/6.png" alt="Скрийншот 6" width="720">
+</p>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<p align="center">
+  <img src="public/images/screenshots/7.png" alt="Скрийншот 7" width="720">
+</p>
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Технологии
 
-## Agentic Development
+| Категория   | Стек |
+|------------|------|
+| Backend    | PHP 8.3+, Laravel 13, Sanctum |
+| Frontend   | Blade, Bootstrap 5.3, Bootstrap Icons |
+| База данни | SQLite (по подразбиране) или MySQL/MariaDB |
+| API        | JSON REST под `/api/v1` |
+| AI         | OpenAI (чрез конфигурация в `.env`) |
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
+
+## Клониране
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/sasho-krist/bookingAI.git
+cd bookingAI
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+(Ако репозиторият е частен, използвайте SSH или токен за достъп.)
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Инсталиране
 
-## Code of Conduct
+### 1. Зависимости (PHP / Composer)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+### 2. Среда
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+copy .env.example .env   # Windows
+# cp .env.example .env   # Linux / macOS
+php artisan key:generate
+```
 
-## License
+Проверете `APP_URL` (напр. `http://localhost` или пътят под WAMP: `http://localhost/bookingAI/public`).
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 3. База данни
+
+По подразбиране в `.env` е `DB_CONNECTION=sqlite`. Създайте файла:
+
+```bash
+# ако няма database/database.sqlite
+type nul > database\database.sqlite   # Windows
+# touch database/database.sqlite      # Linux / macOS
+```
+
+Или настройте **MySQL** в `.env` (`DB_HOST`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
+
+```bash
+php artisan migrate
+```
+
+### 4. Сесия / кеш (по избор)
+
+Ако използвате `SESSION_DRIVER=database` и `CACHE_STORE=database` (както в `.env.example`), миграциите създават необходимите таблици. Уверете се, че `php artisan migrate` е изпълнен успешно.
+
+### 5. OpenAI (по избор)
+
+За AI функции добавете в `.env`:
+
+```env
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-4o-mini
+```
+
+### 6. Frontend build (по избор)
+
+Ако ползвате Vite за активи:
+
+```bash
+npm install
+npm run build
+```
+
+За локална разработка с горещо презареждане: `npm run dev` (заедно с `php artisan serve` или вашия виртуален хост).
+
+### 7. Стартиране
+
+```bash
+php artisan serve
+```
+
+Отворете приложението на адреса от `APP_URL` / показания от `serve` порт.
+
+**Първи потребител:** регистрация през `/register`, после влизане и използване на първоначалната настройка или менютата за бизнеси и локации.
+
+---
+
+## Конфигурация (.env)
+
+| Променлива | Описание |
+|------------|-----------|
+| `APP_NAME`, `APP_URL` | Име и базов URL на приложението |
+| `DB_*` | Връзка към базата данни |
+| `OPENAI_*` | Ключ и модел за AI функции |
+| `SESSION_*`, `CACHE_*`, `QUEUE_*` | Сесии, кеш, опашки |
+
+Копирайте от `.env.example` и адаптирайте според средата (локално, staging, production).
+
+---
+
+## Функционалности
+
+### Уеб приложение
+
+- **Регистрация и вход**, профил и смяна на парола  
+- **Начална страница** (`/`) — представяне, функции, линкове към правни страници и API информация  
+- **Типове бизнес**, **бизнеси**, **локации**, **услуги**, **работно време** по локация  
+- **Резервации** — създаване, списък, статуси  
+- **Клиенти**  
+- **Първоначална настройка** — стъпков съветник (бизнес → локация → услуга → часове)  
+- **AI препоръки** (слотове, натовареност и др.) — при конфигуриран OpenAI ключ  
+- **Тъмна / светла тема** (запис в `localStorage`), банер за бисквитки  
+- Вътрешна страница **API документация** (за логнати потребители): `/api-docs`
+
+### Сигурност на данните
+
+Достъп до бизнеси и локации е ограничен до подходящи потребители („демо“ записи без собственик могат да са видими според логиката в приложението).
+
+---
+
+## REST API
+
+Базов път: **`/api/v1`** (JSON).
+
+### Автентикация (Laravel Sanctum)
+
+1. **Издаване на токен** (без Bearer):
+
+   `POST /api/v1/auth/token`  
+   Тяло (JSON): `email`, `password`, по желание `device_name`.
+
+2. **Защитени заявки:** заглавка:
+
+   ```http
+   Authorization: Bearer <вашият_токен>
+   Accept: application/json
+   Content-Type: application/json
+   ```
+
+3. **Излизане / анулиране на текущия токен:**
+
+   `POST /api/v1/auth/logout` (с Bearer токен).
+
+### Основни групи endpoint-и
+
+Кратък преглед (пълен списък и параметри — в приложението при **API документация**, след вход):
+
+| Област | Примери |
+|--------|---------|
+| Типове бизнес | `GET/POST /business-types`, `PUT/DELETE …/{id}` |
+| Бизнеси | CRUD под `/businesses`, локации под `POST /businesses/{id}/venues` |
+| Локации | `/venues`, работно време `PUT /venues/{id}/business-hours` |
+| Услуги | под `/venues/{venue}/services` |
+| Клиенти | `/customers` |
+| Резервации | `/bookings`, `/venues/{venue}/bookings`, `PATCH/DELETE /bookings/{id}` |
+| AI | `POST /api/v1/ai/slots`, `…/ai/load-forecast`, и др. |
+
+Всички защитени маршрути изискват валиден Sanctum токен и спазват правилата за достъп като уеб приложението.
+
+---
+
+## Тестове и качество на кода
+
+```bash
+php artisan test
+```
+
+Форматиране на PHP с **Laravel Pint**:
+
+```bash
+vendor/bin/pint
+```
+
+---
+
+## Полезни команди
+
+```bash
+php artisan migrate
+php artisan migrate:fresh --seed   # внимание: изчиства данни (ако има seeder)
+php artisan route:list
+php artisan config:clear
+```
+
+---
+
+## Лиценз
+
+Кодът на проекта следва подходящия лиценз за вашия репозиторий (често **MIT**, както скелетът на Laravel). Уточнете според `composer.json` / вашите нужди.
+
+Фреймуъркът Laravel е с отворен код под [MIT лиценз](https://opensource.org/licenses/MIT).
