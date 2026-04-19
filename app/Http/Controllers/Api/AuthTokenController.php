@@ -43,7 +43,7 @@ class AuthTokenController extends Controller
 
     public function destroy(Request $request): JsonResponse
     {
-        $request->user()->currentAccessToken()?->delete();
+        $request->user()->currentAccessToken()->delete();
 
         return response()->json(['message' => 'Токенът е отменен.']);
     }

@@ -17,6 +17,7 @@
     </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" crossorigin="anonymous">
+    @stack('head')
 </head>
 <body class="bg-body-secondary min-vh-100 d-flex flex-column">
     <nav class="navbar navbar-expand-lg border-bottom bg-body shadow-sm">
@@ -31,6 +32,9 @@
             <div class="collapse navbar-collapse" id="landingNav">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-1">
                     <li class="nav-item"><a class="nav-link" href="{{ url('/#features') }}">Функции</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/#venues') }}">Локации</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/#trust') }}">Доверие</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/#reviews') }}">Отзиви</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/#api') }}">API</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('legal.faq') }}">ЧЗВ</a></li>
                     <li class="nav-item d-flex align-items-center ms-lg-2 mb-2 mb-lg-0 pt-2 pt-lg-0 border-top border-lg-0 mt-2 mt-lg-0">

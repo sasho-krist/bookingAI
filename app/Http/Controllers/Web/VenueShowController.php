@@ -8,6 +8,7 @@ use App\Models\Booking;
 use App\Models\Venue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\View\View;
 
 class VenueShowController extends Controller
@@ -37,9 +38,14 @@ class VenueShowController extends Controller
             ->orderBy('starts_at')
             ->get();
 
-        $bookingsByDay = $bookings->groupBy(function (Booking $b) use ($venue) {
+        $grouped = $bookings->groupBy(function (Booking $b) use ($venue): string {
             return $b->starts_at->timezone($venue->timezone)->format('Y-m-d');
         });
+
+        /** @var SupportCollection<string, SupportCollection<int, Booking>> $bookingsByDay */
+        $bookingsByDay = SupportCollection::make($grouped->map(
+            fn ($group): SupportCollection => SupportCollection::make($group->all())
+        )->all());
 
         $calendarWeeks = $this->buildCalendarWeeks($month, $venue->timezone, $bookingsByDay);
 
@@ -61,10 +67,10 @@ class VenueShowController extends Controller
     }
 
     /**
-     * @param  \Illuminate\Support\Collection<string, \Illuminate\Support\Collection<int, Booking>>  $bookingsByDay
+     * @param  SupportCollection<string, SupportCollection<int, Booking>>  $bookingsByDay
      * @return list<list<array{date: string, inMonth: bool, count: int, dayNum: int}>>
      */
-    private function buildCalendarWeeks(Carbon $month, string $tz, $bookingsByDay): array
+    private function buildCalendarWeeks(Carbon $month, string $tz, SupportCollection $bookingsByDay): array
     {
         $first = $month->copy()->timezone($tz)->startOfMonth();
         $last = $month->copy()->timezone($tz)->endOfMonth();
@@ -77,9 +83,9 @@ class VenueShowController extends Controller
             for ($i = 0; $i < 7; $i++) {
                 $inMonth = $cursor->gte($first) && $cursor->lte($last);
                 $dateKey = $cursor->format('Y-m-d');
-                $count = $inMonth && $bookingsByDay->has($dateKey)
-                    ? $bookingsByDay->get($dateKey)->count()
-                    : 0;
+                /** @var SupportCollection<int, Booking>|null $dayBookings */
+                $dayBookings = $bookingsByDay->get($dateKey);
+                $count = $inMonth && $dayBookings !== null ? $dayBookings->count() : 0;
 
                 $week[] = [
                     'date' => $dateKey,

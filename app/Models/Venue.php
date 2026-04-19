@@ -3,10 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property int $id
+ * @property int|null $business_id
+ * @property string $name
+ * @property string|null $type
+ * @property string $timezone
+ * @property array|null $business_hours
+ * @property-read Business|null $business
+ * @property-read Collection<int, Service> $services
+ *
+ * @method static Builder<Venue> accessibleByCurrentUser()
+ */
 class Venue extends Model
 {
     protected $fillable = [

@@ -2,7 +2,7 @@
     $showOg = $showOg ?? false;
 @endphp
 <meta name="description" content="@yield('meta_description', config('seo.description'))">
-<meta name="keywords" content="{{ config('seo.keywords') }}">
+<meta name="keywords" content="@yield('meta_keywords', config('seo.keywords'))">
 <meta name="author" content="{{ config('seo.author') }}">
 <link rel="canonical" href="{{ url()->current() }}">
 @if ($showOg)

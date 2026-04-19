@@ -120,7 +120,7 @@ class BookingController extends Controller
         if (array_key_exists('starts_at', $data) && $data['starts_at'] !== null) {
             $startsAt = Carbon::parse($data['starts_at']);
             $booking->starts_at = $startsAt;
-            $duration = $booking->service?->duration_minutes ?? 30;
+            $duration = $booking->service !== null ? $booking->service->duration_minutes : 30;
             $booking->ends_at = $startsAt->copy()->addMinutes($duration);
         }
 

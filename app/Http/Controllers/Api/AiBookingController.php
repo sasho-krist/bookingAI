@@ -102,15 +102,15 @@ class AiBookingController extends Controller
 
         $venueId = (int) $data['venue_id'];
         $affected = collect($data['affected_booking_ids'] ?? [])
-            ->map(fn (int $id) => Booking::query()->with(['service', 'customer'])->find($id))
-            ->filter(fn (?Booking $b) => $b !== null && (int) $b->venue_id === $venueId)
+            ->map(fn (int $id): ?Booking => Booking::query()->with(['service', 'customer'])->find($id))
+            ->filter(fn (?Booking $b): bool => $b !== null && (int) $b->venue_id === $venueId)
             ->values();
 
         $payload = [
             ...$context,
             'task' => 'auto_reschedule',
             'problem' => $data['problem'],
-            'affected_bookings' => $affected->map(fn (Booking $b) => [
+            'affected_bookings' => $affected->map(fn (Booking $b): array => [
                 'id' => $b->id,
                 'starts_at' => $b->starts_at?->toIso8601String(),
                 'ends_at' => $b->ends_at?->toIso8601String(),
@@ -158,9 +158,7 @@ class AiBookingController extends Controller
             ->with(['venue', 'service', 'customer'])
             ->findOrFail($data['booking_id']);
 
-        if ($booking->venue_id !== null) {
-            Venue::accessibleByCurrentUser()->whereKey($booking->venue_id)->firstOrFail();
-        }
+        Venue::accessibleByCurrentUser()->whereKey($booking->venue_id)->firstOrFail();
 
         $days = $data['history_days'] ?? 180;
         $from = now()->subDays($days);
@@ -186,7 +184,7 @@ class AiBookingController extends Controller
                 'service' => $booking->service?->only(['id', 'name', 'duration_minutes']),
                 'customer' => $booking->customer?->only(['id', 'name', 'email', 'phone']),
             ],
-            'customer_recent_bookings' => $customerBookings->map(fn (Booking $b) => [
+            'customer_recent_bookings' => $customerBookings->map(fn (Booking $b): array => [
                 'id' => $b->id,
                 'starts_at' => $b->starts_at?->toIso8601String(),
                 'status' => $b->status,

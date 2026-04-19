@@ -2,12 +2,12 @@
 
 @section('title', 'Често задавани въпроси — '.config('app.name'))
 
-@section('meta_description', 'ЧЗВ за BookingAI — как да започнете, локации, резервации online, API и често срещани въпроси.')
+@section('meta_description', 'ЧЗВ за BookingAI (Laravel 13, PHP 8.3+) — резервации по локации и заведения, AI препоръки, REST API с Laravel Sanctum и първоначална настройка.')
 
 @section('content')
     <div class="container py-5" style="max-width: 46rem;">
         <h1 class="h3 mb-4">Често задавани въпроси (ЧЗВ)</h1>
-        <p class="text-body-secondary small mb-4">Кратки отговори за типични сценарии. За правни въпроси вижте <a href="{{ route('legal.privacy') }}">политиката за поверителност</a> и <a href="{{ route('legal.terms') }}">условията за ползване</a>.</p>
+        <p class="text-body-secondary small mb-4">Кратки отговори за приложението за управление на резервации и интеграции. За правни въпроси вижте <a href="{{ route('legal.privacy') }}">политиката за поверителност</a> и <a href="{{ route('legal.terms') }}">условията за ползване</a>.</p>
 
         <div class="accordion" id="faqAccordion">
             <div class="accordion-item">
@@ -55,6 +55,18 @@
                 <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                     <div class="accordion-body small text-body-secondary">
                         Данните се съхраняват в базата, конфигурирана за вашата инсталация (напр. MySQL/SQLite). Прегледайте политиката за поверителност и мерките за сигурност на вашия хостинг.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                        Къде да оставя отзив (Trustpilot, Google)?
+                    </button>
+                </h2>
+                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body small text-body-secondary">
+                        Виджети и бутони за отзиви се показват в секцията <strong>Отзиви</strong> на <a href="{{ url('/#reviews') }}">началната страница</a>, ако операторът на услугата е конфигурирал Trustpilot и/или връзки към Google. Иначе се свържете директно с оператора за алтернативен канал за обратна връзка.
                     </div>
                 </div>
             </div>

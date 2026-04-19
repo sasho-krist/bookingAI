@@ -2,7 +2,7 @@
 
 @section('title', 'Условия за ползване — '.config('app.name'))
 
-@section('meta_description', 'Общи условия за ползване на BookingAI — резервации, бизнес локации, услуги и AI функции.')
+@section('meta_description', 'Общи условия за BookingAI — управление на резервации с Laravel 13 и PHP 8.3+, множество локации и услуги, AI функции и REST API достъп.')
 
 @section('content')
     <div class="container py-5" style="max-width: 42rem;">

@@ -3,6 +3,7 @@
 namespace App\Services\Ai;
 
 use App\Models\Booking;
+use App\Models\Service;
 use App\Models\Venue;
 use App\Services\OpenAi\OpenAiClient;
 use Carbon\Carbon;
@@ -168,7 +169,7 @@ TXT;
                 'timezone' => $venue->timezone,
                 'business_hours' => $venue->business_hours,
             ],
-            'services' => $venue->services->map(fn ($s) => [
+            'services' => $venue->services->map(fn (Service $s): array => [
                 'id' => $s->id,
                 'name' => $s->name,
                 'duration_minutes' => $s->duration_minutes,
@@ -178,7 +179,7 @@ TXT;
                 'to' => $to->toIso8601String(),
             ],
             'bookings_window_note_bg' => 'Прозорецът може да включва минали резервации (за натоварване) и бъдещи (заетост). Това не означава, че миналите дати са свободни за нови резервации.',
-            'bookings' => $bookings->map(fn (Booking $b) => [
+            'bookings' => $bookings->map(fn (Booking $b): array => [
                 'id' => $b->id,
                 'starts_at' => $b->starts_at?->toIso8601String(),
                 'ends_at' => $b->ends_at?->toIso8601String(),

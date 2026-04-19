@@ -51,8 +51,11 @@ class OpenAiClient
             throw new RuntimeException('OpenAI connection failed: '.$e->getMessage(), 0, $e);
         } catch (RequestException $e) {
             $response = $e->response;
-            $body = $response?->json();
-            $message = is_array($body) ? ($body['error']['message'] ?? $response?->body() ?? '') : ($response?->body() ?? '');
+            $body = $response->json();
+            $fallbackBody = $response->body();
+            $message = is_array($body)
+                ? (string) ($body['error']['message'] ?? $fallbackBody)
+                : $fallbackBody;
             throw new RuntimeException('OpenAI request failed: '.$message, 0, $e);
         }
 

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Web\Concerns\RedirectsAfterBookingFlow;
 use App\Http\Controllers\Web\Concerns\AuthorizesVenueAccess;
+use App\Http\Controllers\Web\Concerns\RedirectsAfterBookingFlow;
 use App\Models\Service;
 use App\Models\Venue;
 use Illuminate\Http\RedirectResponse;

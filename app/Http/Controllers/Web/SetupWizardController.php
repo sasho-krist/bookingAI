@@ -115,7 +115,8 @@ class SetupWizardController extends Controller
             'timezone' => ['required', 'string', 'max:64'],
         ]);
 
-        $venue = $business->venues()->create([
+        $venue = Venue::query()->create([
+            'business_id' => $business->id,
             'name' => $data['name'],
             'type' => $data['type'] ?? 'generic',
             'timezone' => $data['timezone'],
