@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @include('partials.seo-meta', ['showOg' => false])
     <title>@yield('title', config('app.name'))</title>
     <link rel="icon" href="{{ asset('images/logo.svg') }}" type="image/svg+xml">
     <link rel="apple-touch-icon" href="{{ asset('images/logo.svg') }}">
@@ -19,7 +20,7 @@
     <style>
         .app-sidebar {
             width: 16.5rem;
-            min-height: 100vh;
+            align-self: stretch;
         }
         @media (min-width: 768px) {
             .app-sidebar {
@@ -56,8 +57,8 @@
     </style>
     @stack('styles')
 </head>
-<body class="bg-body-secondary">
-    <div class="d-flex flex-column flex-md-row min-vh-100">
+<body class="bg-body-secondary d-flex flex-column min-vh-100">
+    <div class="d-flex flex-column flex-md-row flex-grow-1 min-h-0">
         <aside class="app-sidebar border-end bg-body-tertiary d-flex flex-column flex-shrink-0">
             <div class="p-3 border-bottom">
                 <a href="{{ route('home') }}" class="text-decoration-none text-body fw-semibold d-flex align-items-center gap-2">
@@ -150,6 +151,7 @@
             </div>
         </main>
     </div>
+    @include('partials.site-footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     @include('partials.theme-switch-script')

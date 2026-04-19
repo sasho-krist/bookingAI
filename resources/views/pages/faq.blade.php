@@ -2,6 +2,8 @@
 
 @section('title', 'Често задавани въпроси — '.config('app.name'))
 
+@section('meta_description', 'ЧЗВ за BookingAI — как да започнете, локации, резервации online, API и често срещани въпроси.')
+
 @section('content')
     <div class="container py-5" style="max-width: 46rem;">
         <h1 class="h3 mb-4">Често задавани въпроси (ЧЗВ)</h1>

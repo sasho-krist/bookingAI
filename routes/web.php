@@ -12,13 +12,18 @@ use App\Http\Controllers\Web\BusinessLocationController;
 use App\Http\Controllers\Web\BusinessTypeController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\ProfileController;
+use App\Http\Controllers\Web\RobotsTxtController;
 use App\Http\Controllers\Web\SetupWizardController;
+use App\Http\Controllers\Web\SitemapController;
 use App\Http\Controllers\Web\VenueBusinessHoursController;
 use App\Http\Controllers\Web\VenueManageController;
 use App\Http\Controllers\Web\VenuePageController;
 use App\Http\Controllers\Web\VenueServiceController;
 use App\Http\Controllers\Web\VenueShowController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
+Route::get('/robots.txt', RobotsTxtController::class)->name('robots');
 
 Route::view('/', 'welcome')->name('landing');
 Route::view('/privacy', 'pages.privacy')->name('legal.privacy');

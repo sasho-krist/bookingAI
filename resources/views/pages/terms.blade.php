@@ -2,6 +2,8 @@
 
 @section('title', 'Условия за ползване — '.config('app.name'))
 
+@section('meta_description', 'Общи условия за ползване на BookingAI — резервации, бизнес локации, услуги и AI функции.')
+
 @section('content')
     <div class="container py-5" style="max-width: 42rem;">
         <h1 class="h3 mb-4">Условия за ползване</h1>

@@ -2,6 +2,8 @@
 
 @section('title', 'Политика за поверителност — '.config('app.name'))
 
+@section('meta_description', 'Политика за поверителност на BookingAI — лични данни, бисквитки и отговорност при онлайн резервации.')
+
 @section('content')
     <div class="container py-5" style="max-width: 42rem;">
         <h1 class="h3 mb-4">Политика за поверителност</h1>

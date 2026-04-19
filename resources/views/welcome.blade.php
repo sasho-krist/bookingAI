@@ -2,6 +2,8 @@
 
 @section('title', config('app.name').' — AI резервации за вашия бизнес')
 
+@section('meta_description', 'BookingAI: онлайн резервации за бизнес и локации, резервации online и AI помощ. sasho-dev, Александър Керемидаров (Alexander Keremidarov).')
+
 @section('content')
     <section class="py-5 bg-body border-bottom">
         <div class="container py-lg-4">

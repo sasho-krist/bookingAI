@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @include('partials.seo-meta', ['showOg' => false])
     <title>@yield('title', config('app.name'))</title>
     <link rel="icon" href="{{ asset('images/logo.svg') }}" type="image/svg+xml">
     <link rel="apple-touch-icon" href="{{ asset('images/logo.svg') }}">
@@ -53,6 +54,8 @@
             @yield('content')
         </div>
     </main>
+
+    @include('partials.site-footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     @include('partials.theme-switch-script')

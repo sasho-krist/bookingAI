@@ -1,4 +1,4 @@
-<footer class="border-top bg-body mt-auto py-4">
+<footer class="site-footer border-top bg-body py-4 flex-shrink-0 mt-auto">
     <div class="container">
         <div class="row row-cols-1 row-cols-lg-2 g-3 align-items-center small">
             <div class="text-body-secondary">
@@ -15,6 +15,7 @@
                     <a href="{{ route('legal.privacy') }}" class="link-secondary text-decoration-none">Политика за поверителност</a>
                     <a href="{{ route('legal.terms') }}" class="link-secondary text-decoration-none">Условия за ползване</a>
                     <a href="{{ route('legal.faq') }}" class="link-secondary text-decoration-none">ЧЗВ</a>
+                    <a href="{{ route('sitemap') }}" class="link-secondary text-decoration-none" title="sitemap.xml">Карта на сайта</a>
                 </nav>
             </div>
         </div>
